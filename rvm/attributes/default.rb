@@ -20,8 +20,8 @@
 #
 
 # ruby that will get installed and set to `rvm use default`.
-default['rvm']['default_ruby']      = "ruby-1.9.3-p194"
-default['rvm']['user_default_ruby'] = "ruby-1.9.3-p194"
+default['rvm']['default_ruby']      = "ruby-1.9.2"
+default['rvm']['user_default_ruby'] = "ruby-1.9.2"
 
 # list of additional rubies that will be installed
 default['rvm']['rubies']      = []
@@ -61,6 +61,13 @@ default['rvm']['rvm_gem_options'] = "--no-rdoc --no-ri"
 # a hook to disable installing any default/additional rubies
 default['rvm']['install_rubies']      = "true"
 default['rvm']['user_install_rubies'] = "true"
+
+node['rvm']['user_installs'] = [
+  { 'user'          => 'vagrant',
+    'default_ruby'  => 'mri',
+    'rubies'        => ['1.9.2']
+  }
+]
 
 case platform
 when "redhat","centos","fedora","scientific","amazon"

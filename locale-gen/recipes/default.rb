@@ -18,15 +18,20 @@
 # limitations under the License.
 #
 
-node[:localegen][:lang].each do |lang|
-  bash "append_locale" do
-    user "root"
-    environment ({'lang' => lang})
-    code <<-EOH
-    echo $lang >> /etc/locale.gen
-    EOH
-  end
+template "/etc/locale.gen" do
+  source    "locale.gen.erb"
+  owner     "root"
+  group     "root"
+  mode      "0755"
 end
+
+
+#node[:localegen][:lang].each do |lang|
+  #bash "append_locale" do
+    #user "root"
+    #environment ({'lang' => lang})
+  #end
+#end
 
 execute "locale_gen" do
     command "locale-gen"
