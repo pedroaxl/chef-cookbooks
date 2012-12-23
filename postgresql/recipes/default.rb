@@ -3,6 +3,10 @@
 # Recipe:: default
 #
 
+execute "apt-get update" do
+  command "apt-get update"
+end
+
 package "python-software-properties"
 
 execute "setup ppa apt repository" do
