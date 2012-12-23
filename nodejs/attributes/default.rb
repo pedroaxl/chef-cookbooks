@@ -1,9 +1,8 @@
 #
-# Cookbook Name:: locale-gen
-# Recipe:: default
-# Author:: Dan Hart <dan@danhart.co.uk>
+# Cookbook Name:: nodejs
+# Attributes:: nodejs
 #
-# Copyright 2008-2009, Dan hart.
+# Copyright 2010-2012, Promet Solutions
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,16 +17,9 @@
 # limitations under the License.
 #
 
-execute "locale-gen" do
-  action :nothing
-  command "locale-gen"
-end
-
-file "/var/lib/locales/supported.d/pt_BR" do
-  action :create
-  owner "root"
-  group "root"
-  mode "0644"
-  content node[:localegen][:lang].join("\n") + "\n"
-  notifies :run, "execute[locale-gen]", :immediate
-end
+default['nodejs']['install_method'] = 'source'
+default['nodejs']['version'] = '0.8.6'
+default['nodejs']['checksum'] = 'dbd42800e69644beff5c2cf11a9d4cf6dfbd644a9a36ffdd5e8c6b8db9240854'
+default['nodejs']['dir'] = '/usr/local'
+default['nodejs']['npm'] = '1.1.48'
+default['nodejs']['src_url'] = "http://nodejs.org/dist"
