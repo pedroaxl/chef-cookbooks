@@ -21,5 +21,4 @@ generate the tar
 
 In case you want made some change in any of the files and want to regenerate the tar file to be downloaded, run the command above:
 
-$tar zcvf chef-solo.tar.gz --exclude='.git' ./cookbooks
-
+chef-solo.tar.gz --exclude='.git' --exclude='chef-solo.tar.gz' ./cookbooks
