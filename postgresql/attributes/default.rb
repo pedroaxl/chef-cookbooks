@@ -353,10 +353,10 @@ default[:postgresql][:checkpoint_segments]=30
 default[:postgresql][:checkpoint_timeout]="50min"
 
 # locales for pt-br
-default[:postgresql][:datestyle]="iso, dmy"
+#default[:postgresql][:datestyle]="iso, dmy"
 #default[:postgresql][:lc_messages]="pt_BR.UTF-8"
 #default[:postgresql][:lc_monetary]="pt_BR.UTF-8"
 #default[:postgresql][:lc_numeric]="pt_BR.UTF-8"
 #default[:postgresql][:lc_time]="pt_BR.UTF-8"
-default[:postgresql][:default_text_search_config]="pg_catalog.portuguese"
+#default[:postgresql][:default_text_search_config]="pg_catalog.portuguese"
 
