@@ -7,7 +7,7 @@
 # Copyright 2012, Phil Cohen
 #
 
-default["postgresql"]["version"]                         = "9.1"
+default["postgresql"]["version"]                         = "9.2"
 
 default["postgresql"]["environment_variables"]           = {}
 default["postgresql"]["pg_ctl_options"]                  = ""

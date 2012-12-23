@@ -1,1 +1,1 @@
-default['localegen']['lang'] = ["pt_BR.UTF-8","en_US.UTF-8"]
+default[:localegen][:lang] = ["pt_BR.UTF-8 UTF-8"]

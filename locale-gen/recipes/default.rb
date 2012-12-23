@@ -18,21 +18,16 @@
 # limitations under the License.
 #
 
-template "/etc/locale.gen" do
-  source    "locale.gen.erb"
-  owner     "root"
-  group     "root"
-  mode      "0755"
+execute "locale-gen" do
+  action :nothing
+  command "locale-gen"
 end
 
-
-#node[:localegen][:lang].each do |lang|
-  #bash "append_locale" do
-    #user "root"
-    #environment ({'lang' => lang})
-  #end
-#end
-
-execute "locale_gen" do
-    command "locale-gen"
+file "/etc/locale.gen" do
+  action :create
+  owner "root"
+  group "root"
+  mode "0644"
+  content node[:localegen][:lang].join("\n") + "\n"
+  notifies :run, "execute[locale-gen]", :immediate
 end
