@@ -28,6 +28,6 @@ file "/var/lib/locales/supported.d/pt_BR" do
   owner "root"
   group "root"
   mode "0644"
-  content node[:localegen][:lang].join("\n") + "\n"
+  content node[:localegen][:lang].join("\n")
   notifies :run, "execute[locale-gen]", :immediate
 end
