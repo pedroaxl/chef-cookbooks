@@ -16,6 +16,12 @@ default["postgresql"]["pg_ident"]                        = []
 default["postgresql"]["start"]                           = "auto"  # auto, manual, disabled
 
 #------------------------------------------------------------------------------
+# POSTGIS
+#------------------------------------------------------------------------------
+
+default["postgis"]["version"]                            = "1.5"
+
+#------------------------------------------------------------------------------
 # FILE LOCATIONS
 #------------------------------------------------------------------------------
 default["postgresql"]["data_directory"]                  = "/var/lib/postgresql/#{node["postgresql"]["version"]}/main"
@@ -337,11 +343,18 @@ default["postgresql"]["restart_after_crash"]             = "on"
 
 
 #------------------------------------------------------------------------------
+# USERS AND DATABASES
+#------------------------------------------------------------------------------
+
+default["postgresql"]["users"]                           = []
+default["postgresql"]["databases"]                       = []
+
+
+#------------------------------------------------------------------------------
 # CUSTOMIZED OPTIONS
 #------------------------------------------------------------------------------
 
 default["postgresql"]["custom_variable_classes"]         = ""
-
 # WARNING! This tunnings must not be used in a production environment
 # @pedroaxl's tunnings
 default[:postgresql][:shared_buffers]= "24MB"
@@ -353,10 +366,11 @@ default[:postgresql][:checkpoint_segments]=30
 default[:postgresql][:checkpoint_timeout]="50min"
 
 # locales for pt-br
-#default[:postgresql][:datestyle]="iso, dmy"
-#default[:postgresql][:lc_messages]="pt_BR.UTF-8"
-#default[:postgresql][:lc_monetary]="pt_BR.UTF-8"
-#default[:postgresql][:lc_numeric]="pt_BR.UTF-8"
-#default[:postgresql][:lc_time]="pt_BR.UTF-8"
-#default[:postgresql][:default_text_search_config]="pg_catalog.portuguese"
+default[:postgresql][:datestyle]="iso, dmy"
+default[:postgresql][:lc_messages]="pt_BR.UTF-8"
+default[:postgresql][:lc_monetary]="pt_BR.UTF-8"
+default[:postgresql][:lc_numeric]="pt_BR.UTF-8"
+default[:postgresql][:lc_time]="pt_BR.UTF-8"
+default[:postgresql][:default_text_search_config]="pg_catalog.portuguese"
+
 

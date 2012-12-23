@@ -39,7 +39,7 @@ The following platforms are supported by this cookbook, meaning that the recipes
 
 This cookbook installs the postgresql components if not present, and pulls updates if they are installed on the system.
 
-Additionally this cookbook provides two definitions to create, alter and delete users as well as create and drop databases. Usage is as follows:
+Additionally this cookbook provides three definitions to create, alter and delete users as well as create and drop databases or setup extensions. Usage is as follows:
 
 
 ```ruby
@@ -47,6 +47,12 @@ Additionally this cookbook provides two definitions to create, alter and delete 
 pg_user "myuser" do
   privileges :superuser => false, :createdb => false, :login => true
   password "mypassword"
+end
+
+# create a user with an MD5-encrypted password
+pg_user "myuser" do
+  privileges :superuser => false, :createdb => false, :login => true
+  encrypted_password "667ff118ef6d196c96313aeaee7da519"
 end
 
 # drop a user
@@ -59,12 +65,51 @@ pg_database "mydb" do
   owner "myuser"
   encoding "utf8"
   template "template0"
+  locale "en_US.UTF8"
+end
+
+# install extensions to database
+pg_database_extensions "mydb" do
+  languages "plpgsql"              # install `plpgsql` language - single value may be passed without array
+  extensions ["hstore", "dblink"]  # install `hstore` and `dblink` extensions - multiple values in array
+  postgis true                     # install `postgis` support
+end
+
+# drop dblink extension
+pg_database_extensions "mydb" do
+  action :drop
+  extensions "dblink"
 end
 
 # drop a database
 pg_database "mydb" do
   action :drop
 end
+```
+
+Or add the user/database via attributes:
+
+```ruby
+:users => [
+  {
+    :username  => "dickeyxxx",
+    :password  => "password",
+    :superuser => true,
+    :createdb  => true,
+    :login     => true
+  }
+],
+
+:databases => [
+  {
+    :name => "my_db",
+    :owner  => "dickeyxxx",
+    :template  => "template0",
+    :encoding  => "utf8",
+    :locale => "en_US.UTF8",
+    :extensions => "hstore"
+  }
+]
 ```
 
 
@@ -78,6 +123,11 @@ default["postgresql"]["pg_ctl_options"]                  = ""
 default["postgresql"]["pg_hba"]                          = []
 default["postgresql"]["pg_ident"]                        = []
 default["postgresql"]["start"]                           = "auto"  # auto, manual, disabled
+
+#------------------------------------------------------------------------------
+# POSTGIS
+#------------------------------------------------------------------------------
+default["postgis"]["version"]                            = "1.5"
 
 #------------------------------------------------------------------------------
 # FILE LOCATIONS
@@ -401,6 +451,14 @@ default["postgresql"]["restart_after_crash"]             = "on"
 
 
 #------------------------------------------------------------------------------
+# USERS AND DATABASES
+#------------------------------------------------------------------------------
+
+default["postgresql"]["users"]                           = []
+default["postgresql"]["databases"]                       = []
+
+
+#------------------------------------------------------------------------------
 # CUSTOMIZED OPTIONS
 #------------------------------------------------------------------------------
 
@@ -445,6 +503,16 @@ Many thanks go to the following who have contributed to making this cookbook eve
 * **[@flashingpumpkin](https://github.com/flashingpumpkin)**
   * recipe bugfixes
   * add `pg_user` and `pg_database` definitions
+* **[@cmer](https://github.com/cmer)**
+  * add `encrypted_password` param for `pg_user` definition
+* **[@dickeyxxx](https://github.com/dickeyxxx)**
+  * speed up recipe loading and execution
+  * add support for specifying database locale
+  * add support for adding users and databases via attributes
+* **[@alno](https://github.com/alno)**
+  * add support to install additional languages/extensions/postgis to existing databases
+  * add `pg_database_extensions` definition
+
 
 
 ## License
