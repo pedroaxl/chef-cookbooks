@@ -14,9 +14,9 @@ If you want to use this with Rails projects, included in this project there is m
 
 You just have to copy it to your Rails project and run vagrant provision. It should install all the environment and run a thin instance on your project.
 
-To use it you just need "Virtual Box":https://www.virtualbox.org/ and "Vagrant":http://vagrantup.com/ installed.
+To use it you just need Virtual Box (https://www.virtualbox.org/) and Vagrant (http://vagrantup.com/) installed.
 
-generate the tar
+generating the tar
 ==============
 
 In case you want made some change in any of the files and want to regenerate the tar file to be downloaded, run the command above:

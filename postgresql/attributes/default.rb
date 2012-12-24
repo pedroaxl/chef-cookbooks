@@ -47,7 +47,7 @@ default["postgresql"]["bonjour_name"]                    = ""
 
 # security and authentication
 default["postgresql"]["authentication_timeout"]          = "1min"
-default["postgresql"]["ssl"]                             = true
+default["postgresql"]["ssl"]                             = false
 default["postgresql"]["ssl_ciphers"]                     = "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH"
 default["postgresql"]["ssl_renegotiation_limit"]         = "512MB"
 default["postgresql"]["password_encryption"]             = "on"
