@@ -16,6 +16,8 @@ You just have to copy it to your Rails project and run vagrant provision. It sho
 
 To use it you just need Virtual Box (https://www.virtualbox.org/) and Vagrant (http://vagrantup.com/) installed.
 
+If you have questions about Vagrant, check http://vagrantup.com/v1/docs/getting-started/
+
 generating the tar
 ==============
 
